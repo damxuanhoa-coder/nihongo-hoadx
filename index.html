@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#e11d48" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Nihongo Mr Đàm" />
+  <title>Nihongo Quest Mr Đàm - Học Tiếng Nhật Từ Con Số 0</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- THANH HEADER & THỐNG KÊ GAME HÓA -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-logo">🐕</div>
+        <div class="brand-text">
+          <h1>Nihongo Quest <span style="color: var(--primary);">Mr Đàm</span></h1>
+          <p>Học tiếng Nhật từ con số 0 • Hình ảnh • Video • Trò chơi</p>
+          <p class="brand-copyright">© Bản quyền: <strong>Đàm Xuân Hòa</strong> - <a href="mailto:damxuanhoa@gmail.com">damxuanhoa@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat-pill streak" title="Chuỗi ngày học liên tiếp">
+          🔥 <span id="streakCount">1</span> ngày
+        </div>
+        <div class="stat-pill xp" title="Điểm kinh nghiệm tích lũy">
+          ⭐ <span id="xpCount">0</span> XP (<span id="userLevel">Cấp 1: Tân binh</span>)
+        </div>
+        <button class="speed-toggle" id="speedToggleBtn" onclick="toggleSpeechSpeed()" title="Đổi tốc độ phát âm tiếng Nhật">
+          🐢 Tốc độ đọc: <span id="speedLabel">Chuẩn (0.9x)</span>
+        </button>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">
+          🌙 Giao diện tối
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- THANH ĐIỀU HƯỚNG 5 CHẶNG HỌC (MÁY TÍNH, LAPTOP & IPAD) -->
+  <nav class="main-nav" aria-label="Điều hướng chính">
+    <button class="nav-tab active" data-target="tab-kana" onclick="switchTab('tab-kana')">
+      🌸 1. Bảng Chữ Cái (Hiragana & Katakana)
+    </button>
+    <button class="nav-tab" data-target="tab-lessons" onclick="switchTab('tab-lessons')">
+      🎬 2. Bài Giảng Video & Từ Vựng
+    </button>
+    <button class="nav-tab" data-target="tab-grammar" onclick="switchTab('tab-grammar')">
+      🧩 3. Ngữ Pháp & Kanji Chiết Tự
+    </button>
+    <button class="nav-tab" data-target="tab-games" onclick="switchTab('tab-games')">
+      🎮 4. Luyện Tập & Trò Chơi
+    </button>
+    <button class="nav-tab" data-target="tab-parent" onclick="switchTab('tab-parent')">
+      👨‍👧 5. Góc Phụ Huynh (Thêm Bài & Đưa Lên Web)
+    </button>
+  </nav>
+
+  <!-- THANH ĐIỀU HƯỚNG DƯỚI ĐÁY MÀN HÌNH (CHUYÊN DỤNG CHO ĐIỆN THOẠI) -->
+  <nav class="mobile-bottom-nav" aria-label="Điều hướng di động">
+    <button class="mob-nav-btn active" data-target="tab-kana" onclick="switchTab('tab-kana')">
+      <span class="mob-icon">🌸</span>
+      <span>Chữ Cái</span>
+    </button>
+    <button class="mob-nav-btn" data-target="tab-lessons" onclick="switchTab('tab-lessons')">
+      <span class="mob-icon">🎬</span>
+      <span>Bài Giảng</span>
+    </button>
+    <button class="mob-nav-btn" data-target="tab-grammar" onclick="switchTab('tab-grammar')">
+      <span class="mob-icon">🧩</span>
+      <span>Ngữ Pháp</span>
+    </button>
+    <button class="mob-nav-btn" data-target="tab-games" onclick="switchTab('tab-games')">
+      <span class="mob-icon">🎮</span>
+      <span>Trò Chơi</span>
+    </button>
+    <button class="mob-nav-btn" data-target="tab-parent" onclick="switchTab('tab-parent')">
+      <span class="mob-icon">👨‍👧</span>
+      <span>Phụ Huynh</span>
+    </button>
+  </nav>
+
+  <main class="container">
+
+    <!-- BANNER TIẾN ĐỘ TỔNG QUAN -->
+    <section class="hero-card">
+      <div class="hero-content">
+        <span class="hero-badge">🇯🇵 LỘ TRÌNH THIẾT KẾ RIÊNG CHO HỌC SINH LỚP 8</span>
+        <h2>Chào mừng con đến với hành trình chinh phục Tiếng Nhật!</h2>
+        <p>
+          Mẹo nhỏ: Hãy bắt đầu bằng việc bấm vào từng chữ cái ở <strong>Chặng 1</strong> để nghe giọng đọc bản xứ, xem hình vẽ liên tưởng và tập tô nét chữ ngay trên màn hình nhé!
+        </p>
+        <div class="progress-overview">
+          <div class="prog-box">
+            <span>Đã thuộc Hiragana</span>
+            <strong id="hiraProgressText">0 / 46 chữ</strong>
+          </div>
+          <div class="prog-box">
+            <span>Đã thuộc Katakana</span>
+            <strong id="kataProgressText">0 / 46 chữ</strong>
+          </div>
+          <div class="prog-box">
+            <span>Bài giảng chủ đề</span>
+            <strong id="lessonCountText">5 Chủ đề</strong>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center;">
+        <button class="btn-primary" style="font-size: 1rem; padding: 14px 24px; box-shadow: 0 8px 20px rgba(0,0,0,0.25);" onclick="speakJapanese('こんにちは！いっしょに にほんご を べんきょう しましょう！')">
+          🔊 Nghe Shiba chào bằng tiếng Nhật!
+        </button>
+        <p style="font-size: 0.78rem; margin-top: 8px; opacity: 0.85;">"Konnichiwa! Cùng nhau học tiếng Nhật nhé!"</p>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TAB 1: BẢNG CHỮ CÁI HIRAGANA & KATAKANA TƯƠNG TÁC                 -->
+    <!-- ================================================================= -->
+    <section id="tab-kana" class="tab-panel active">
+      <div class="sub-toolbar">
+        <div class="pill-group">
+          <button class="pill-btn active" id="btnShowHira" onclick="switchKanaType('hiragana')">
+            あ Bảng Hiragana (46 chữ mềm)
+          </button>
+          <button class="pill-btn" id="btnShowKata" onclick="switchKanaType('katakana')">
+            ア Bảng Katakana (46 chữ cứng)
+          </button>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <span style="font-size: 0.88rem; color: var(--text-muted);">
+            💡 <strong>Bấm vào từng ô chữ</strong> để nghe phát âm, xem mẹo nhớ hình ảnh & tập viết nét!
+          </span>
+        </div>
+      </div>
+
+      <div id="kanaGridContainer" class="kana-grid"></div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TAB 2: BÀI GIẢNG VIDEO, TỪ VỰNG HÌNH ẢNH & FLASHCARD 3D           -->
+    <!-- ================================================================= -->
+    <section id="tab-lessons" class="tab-panel">
+      <div class="lesson-layout">
+        <!-- Cột trái: Danh sách bài học từ cơ bản đến nâng cao -->
+        <aside class="lesson-sidebar" id="lessonSidebar"></aside>
+
+        <!-- Cột phải: Nội dung bài học chi tiết -->
+        <div class="lesson-detail-card" id="lessonContentAnchor">
+          <div id="lessonHeaderArea"></div>
+
+          <!-- Chuyển đổi chế độ Học bài giảng & Lật thẻ Flashcard -->
+          <div class="sub-toolbar" style="margin-top: 16px;">
+            <div class="pill-group">
+              <button class="pill-btn active" id="btnLessonStudyMode" onclick="setLessonViewMode('study')">
+                📺 Video Bài Giảng & Từ Vựng
+              </button>
+              <button class="pill-btn" id="btnLessonSlideMode" onclick="setLessonViewMode('slide')">
+                🎞️ Bài Giảng Tương Tác (Tự Động Đọc)
+              </button>
+              <button class="pill-btn" id="btnLessonFlashcardMode" onclick="setLessonViewMode('flashcard')">
+                🗂️ Lật Thẻ Flashcard 3D
+              </button>
+            </div>
+            <button class="btn-secondary" onclick="openChangeVideoModal()">
+              🎬 Đổi link Video YouTube bài này
+            </button>
+          </div>
+
+          <!-- Khung 1: Xem Video Bài Giảng YouTube & Từ Vựng -->
+          <div id="lessonStudyView">
+            <div class="video-container" id="lessonVideoBox"></div>
+            <div class="summary-notes" id="lessonSummaryBox"></div>
+            <h3 style="margin-bottom: 8px;">🎯 Từ vựng & Câu ví dụ trong bài (Bấm 🔊 để nghe phát âm)</h3>
+            <div class="vocab-grid" id="lessonVocabGrid"></div>
+          </div>
+
+          <!-- Khung 2: Trình phát Bài Giảng Tương Tác Có Giọng Đọc (Luôn hoạt động 100% không cần YouTube) -->
+          <div id="lessonSlideView" style="display: none;">
+            <div class="interactive-slide-player" id="interactiveSlideBox"></div>
+          </div>
+
+          <!-- Khung 3: Lật thẻ Flashcard 3D -->
+          <div id="lessonFlashcardView" style="display: none; text-align: center; padding: 16px 0;">
+            <p style="color: var(--text-muted); margin-bottom: 8px;">
+              Bấm vào tấm thẻ để lật xem nghĩa tiếng Việt và câu ví dụ!
+            </p>
+            <div class="flashcard-stage">
+              <div class="flashcard-3d" id="flashcard3D" onclick="flipFlashcard()">
+                <div class="fc-face fc-front" id="fcFront"></div>
+                <div class="fc-face fc-back" id="fcBack"></div>
+              </div>
+            </div>
+            <div class="flashcard-controls">
+              <button class="btn-secondary" onclick="prevFlashcard()">⬅️ Từ trước</button>
+              <strong id="fcCounterText">1 / 6</strong>
+              <button class="btn-secondary" onclick="nextFlashcard()">Từ tiếp theo ➡️</button>
+              <button class="btn-primary" onclick="speakCurrentFlashcard()">🔊 Nghe phát âm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TAB 3: NGỮ PHÁP KHỐI MÀU & CHỮ HÁN (KANJI) CHIẾT TỰ              -->
+    <!-- ================================================================= -->
+    <section id="tab-grammar" class="tab-panel">
+      <div class="sub-toolbar">
+        <div class="pill-group">
+          <button class="pill-btn active" id="btnShowGrammar" onclick="switchGrammarSubTab('grammar')">
+            🧱 Ngữ Pháp Công Thức Màu Sắc
+          </button>
+          <button class="pill-btn" id="btnShowKanji" onclick="switchGrammarSubTab('kanji')">
+            ⛩️ Chữ Hán (Kanji) Chiết Tự Qua Tranh
+          </button>
+        </div>
+      </div>
+
+      <div id="grammarListContainer"></div>
+      <div id="kanjiListContainer" class="kanji-grid" style="display: none;"></div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TAB 4: TRÒ CHƠI & TRẮC NGHIỆM PHẢN XẠ                             -->
+    <!-- ================================================================= -->
+    <section id="tab-games" class="tab-panel">
+      <div class="sub-toolbar">
+        <div class="pill-group">
+          <button class="pill-btn active" id="btnGameQuiz" onclick="switchGameMode('quiz')">
+            🎯 Đấu Trường Trắc Nghiệm (+15 XP)
+          </button>
+          <button class="pill-btn" id="btnGameMatch" onclick="switchGameMode('match')">
+            ⚡ Game Ghép Cặp Siêu Tốc (+50 XP)
+          </button>
+          <button class="pill-btn" id="btnGameListen" onclick="switchGameMode('listen')">
+            🎧 Thử Thách Nghe Phản Xạ (+20 XP)
+          </button>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <label for="quizTopicSelect" style="font-weight: 700; font-size: 0.9rem;">Chủ đề thử thách:</label>
+          <select id="quizTopicSelect" onchange="initQuizQuestion(); initMatchingGame(); initListenQuestion();" style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-weight: 700;">
+            <option value="hiragana">Bảng chữ cái Hiragana</option>
+            <option value="katakana">Bảng chữ cái Katakana</option>
+            <option value="vocab">Từ vựng & Giao tiếp 10 bài</option>
+            <option value="kanji">Chữ Hán (Kanji) cơ bản</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Chế độ 1: Trắc nghiệm -->
+      <div id="gameQuizArea" class="quiz-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem;">
+          <span id="quizCategoryLabel">Chủ đề: Hiragana</span>
+          <span id="quizScoreLabel">Đúng liên tiếp: 0 🔥</span>
+        </div>
+        <div class="quiz-question-big" id="quizQuestionMain">あ</div>
+        <button class="audio-btn" onclick="speakQuizCurrent()" style="margin-bottom: 10px;">
+          🔊 Nghe gợi ý phát âm
+        </button>
+        <p id="quizPromptText" style="color: var(--text-muted);">Chữ cái hoặc từ trên có nghĩa / cách đọc là gì?</p>
+
+        <div class="quiz-options" id="quizOptionsGrid"></div>
+        <div id="quizFeedbackBox" style="margin-top: 18px; font-weight: 700; min-height: 28px;"></div>
+        <button class="btn-primary" style="margin-top: 12px;" onclick="initQuizQuestion()">
+          Câu tiếp theo ➡️
+        </button>
+      </div>
+
+      <!-- Chế độ 2: Ghép thẻ -->
+      <div id="gameMatchArea" class="quiz-box" style="display: none; max-width: 820px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <h3>⚡ Ghép Chữ Tiếng Nhật với Cách Đọc / Nghĩa Tương Ứng</h3>
+          <button class="btn-primary" onclick="initMatchingGame()">🔄 Chơi ván mới</button>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">
+          Bấm chọn 1 ô tiếng Nhật rồi bấm chọn 1 ô tiếng Việt/Romaji tương ứng để làm biến mất cặp thẻ!
+        </p>
+        <div id="matchStatusText" style="margin-top: 10px; font-weight: 800; color: var(--primary);"></div>
+        <div class="match-grid" id="matchGridContainer"></div>
+      </div>
+
+      <!-- Chế độ 3: Thử thách Nghe Phản Xạ -->
+      <div id="gameListenArea" class="quiz-box" style="display: none;">
+        <span class="lesson-badge" style="background: var(--secondary);">🎧 LUYỆN TAI NGHE TIẾNG NHẬT</span>
+        <h3 style="margin-top: 6px;">Bấm nút Loa bên dưới để nghe giọng người Nhật đọc và chọn đáp án đúng!</h3>
+        <div style="margin: 22px 0;">
+          <button class="btn-primary" style="font-size: 1.25rem; padding: 18px 34px; border-radius: 999px; box-shadow: 0 10px 25px rgba(225,29,72,0.3);" onclick="speakListenCurrent()">
+            🔊 Bấm Để Nghe Phát Âm
+          </button>
+        </div>
+        <div id="listenRevealText" style="font-size: 1.5rem; font-weight: 900; color: var(--primary); min-height: 36px;">
+          ❓ ❓ ❓
+        </div>
+        <div class="quiz-options" id="listenOptionsGrid"></div>
+        <div id="listenFeedbackBox" style="margin-top: 18px; font-weight: 700; min-height: 28px;"></div>
+        <button class="btn-primary" style="margin-top: 12px;" onclick="initListenQuestion()">
+          Câu nghe tiếp theo ➡️
+        </button>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TAB 5: GÓC PHỤ HUYNH (THÊM TỪ VỰNG/BÀI HỌC & ĐƯA LÊN GITHUB/VERCEL)-->
+    <!-- ================================================================= -->
+    <section id="tab-parent" class="tab-panel">
+      <div class="parent-grid">
+        <!-- Cột 1: Công cụ Thêm Từ Vựng & Tạo Bài Học Mới -->
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div class="lesson-detail-card">
+            <h3>➕ 1. Thêm Từ Vựng / Câu Ví Dụ Mới Vào Bài Học Hiện Có</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px;">
+              Bổ sung thêm từ vựng mới vào bất kỳ bài học nào trong 10 bài hiện có.
+            </p>
+
+            <form onsubmit="handleAddCustomVocab(event)">
+              <div class="form-group">
+                <label>Chọn bài học muốn thêm:</label>
+                <select id="addVocabLessonId"></select>
+              </div>
+              <div class="form-group">
+                <label>Chữ tiếng Nhật (Hiragana / Katakana / Kanji):</label>
+                <input type="text" id="addVocabJp" placeholder="Ví dụ: ドラえもん" required />
+              </div>
+              <div class="form-group">
+                <label>Cách đọc Romaji (để con dễ đọc):</label>
+                <input type="text" id="addVocabRomaji" placeholder="Ví dụ: Doraemon" required />
+              </div>
+              <div class="form-group">
+                <label>Nghĩa tiếng Việt:</label>
+                <input type="text" id="addVocabVi" placeholder="Ví dụ: Chú mèo máy Doraemon" required />
+              </div>
+              <div class="form-group">
+                <label>Biểu tượng minh họa (Emoji):</label>
+                <input type="text" id="addVocabIcon" placeholder="Ví dụ: 🔔" value="🌟" />
+              </div>
+              <div class="form-group">
+                <label>Câu ví dụ tiếng Nhật:</label>
+                <input type="text" id="addVocabExJp" placeholder="Ví dụ: ドラえもん が だいすき です。" />
+              </div>
+              <div class="form-group">
+                <label>Nghĩa câu ví dụ:</label>
+                <input type="text" id="addVocabExVi" placeholder="Ví dụ: Con rất thích Doraemon." />
+              </div>
+              <button type="submit" class="btn-primary" style="width: 100%; padding: 12px;">
+                💾 Lưu từ vựng mới vào bài học
+              </button>
+            </form>
+          </div>
+
+          <div class="lesson-detail-card">
+            <h3>📚 2. Tạo Thêm Một Bài Học (Chủ Đề) Mới Hoàn Toàn</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px;">
+              Tạo Bài 11, Bài 12... kèm Video YouTube và ghi chú tóm tắt.
+            </p>
+            <form onsubmit="handleCreateNewLesson(event)">
+              <div class="form-group">
+                <label>Cấp độ (Ví dụ: Sơ cấp N5 / Trung cấp N4):</label>
+                <input type="text" id="newLessonLevel" value="Mở rộng (N5-N4)" required />
+              </div>
+              <div class="form-group">
+                <label>Tiêu đề bài học mới:</label>
+                <input type="text" id="newLessonTitle" placeholder="Ví dụ: Bài 11: Từ vựng chủ đề Động vật & Thiên nhiên" required />
+              </div>
+              <div class="form-group">
+                <label>Mô tả ngắn dưới tiêu đề:</label>
+                <input type="text" id="newLessonSubtitle" placeholder="Ví dụ: Các loài thú cưng và động vật bằng tiếng Nhật" required />
+              </div>
+              <div class="form-group">
+                <label>Biểu tượng bài học (Emoji):</label>
+                <input type="text" id="newLessonIcon" value="🐾" required />
+              </div>
+              <div class="form-group">
+                <label>Link Video YouTube bài giảng:</label>
+                <input type="text" id="newLessonVideo" placeholder="Ví dụ: https://www.youtube.com/watch?v=gOKdtS3XVCg" required />
+              </div>
+              <div class="form-group">
+                <label>Ghi chú trọng tâm (mỗi ý 1 dòng):</label>
+                <input type="text" id="newLessonNote" placeholder="Ví dụ: Ghi nhớ tên các con vật quen thuộc quanh ta." required />
+              </div>
+              <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #4f46e5, #7c3aed);">
+                ✨ Tạo Bài Học Mới Ngay
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Cột 2: Hướng dẫn đưa lên GitHub & Vercel + Xuất file cập nhật -->
+        <div class="lesson-detail-card">
+          <h3>🚀 Cẩm Nang Triển Khai & Cập Nhật Lên GitHub + Vercel</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px;">
+            Toàn bộ ứng dụng nằm gọn trong thư mục <code>D:\Google Antigravity\HocTiengNhat</code>. Bạn làm theo đúng các bước sau:
+          </p>
+
+          <div class="mnemonic-box">
+            <strong>Bước 1: Đưa web lên GitHub lần đầu (5 phút)</strong>
+            <p style="font-size: 0.88rem; margin-top: 6px;">
+              1. Mở trang <a href="https://github.com" target="_blank" rel="noopener">github.com</a> -> Đăng ký / Đăng nhập tài khoản miễn phí.<br/>
+              2. Bấm dấu <strong>➕ (góc trên bên phải)</strong> -> Chọn <strong>New repository</strong>.<br/>
+              3. Ô <em>Repository name</em> gõ: <code>nihongo-mr-dam</code> -> Chọn <strong>Public</strong> -> Bấm nút xanh <strong>Create repository</strong>.<br/>
+              4. Ở màn hình tiếp theo, bấm vào dòng chữ xanh <strong>uploading an existing file</strong>.<br/>
+              5. Mở thư mục <code>D:\Google Antigravity\HocTiengNhat</code> trên máy tính, kéo thả 4 file (<code>index.html</code>, <code>styles.css</code>, <code>data.js</code>, <code>app.js</code>) vào khung trình duyệt -> Bấm nút xanh <strong>Commit changes</strong>.
+            </p>
+          </div>
+
+          <div class="mnemonic-box" style="border-left-color: var(--secondary);">
+            <strong>Bước 2: Kết nối Vercel để phát sóng Web (2 phút)</strong>
+            <p style="font-size: 0.88rem; margin-top: 6px;">
+              1. Mở trang <a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a> -> Bấm <strong>Sign Up / Log In</strong> -> Chọn <strong>Continue with GitHub</strong>.<br/>
+              2. Bấm nút <strong>Add New...</strong> -> Chọn <strong>Project</strong>.<br/>
+              3. Bạn sẽ thấy kho <code>nihongo-mr-dam</code> hiện ra -> Bấm nút <strong>Import</strong> bên cạnh nó.<br/>
+              4. Không cần chỉnh sửa gì cả, bấm thẳng nút <strong>Deploy</strong>!<br/>
+              5. Chờ 15 giây, pháo hoa nổ trên màn hình! Vercel cấp cho bạn đường link vĩnh viễn: <code>https://nihongo-mr-dam.vercel.app</code>.
+            </p>
+          </div>
+
+          <div class="mnemonic-box" style="border-left-color: var(--success);">
+            <strong>Bước 3: Cách nạp thêm Bài học, Video, Hình ảnh sau khi đã lên Web</strong>
+            <p style="font-size: 0.88rem; margin-top: 6px;">
+              Mỗi khi bạn dùng 2 biểu mẫu bên trái để thêm bài học mới, từ vựng mới hoặc đổi link Video YouTube xong, bạn chỉ cần bấm nút <strong>"📥 Xuất File data.js Mới"</strong> bên dưới, rồi kéo file <code>data.js</code> đó thả đè lên GitHub. Vercel sẽ tự động cập nhật web cho điện thoại/iPad của con sau 15 giây!
+            </p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px;">
+              <button class="btn-primary" onclick="exportUpdatedDataJs()">
+                📥 Xuất File data.js Mới (Để Up Lên GitHub)
+              </button>
+              <button class="btn-secondary" onclick="resetAllProgress()">
+                🗑️ Đặt lại tiến độ học về ban đầu
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER BẢN QUYỀN -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div><strong>Nihongo Quest Mr Đàm</strong> — Nền tảng học tiếng Nhật trực quan từ cơ bản đến nâng cao</div>
+      <div>© Bản quyền thuộc về: <strong>Đàm Xuân Hòa</strong> • Email: <a href="mailto:damxuanhoa@gmail.com">damxuanhoa@gmail.com</a></div>
+    </div>
+  </footer>
+
+  <!-- ================================================================= -->
+  <!-- MODAL CHI TIẾT CHỮ CÁI + HÌNH LIÊN TƯỞNG + BẢNG TẬP VIẾT CANVAS    -->
+  <!-- ================================================================= -->
+  <div class="modal-backdrop" id="kanaModalBackdrop" onclick="closeKanaModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeKanaModal()">✕</button>
+
+      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+        <div id="modalCharBig" style="font-size: 4rem; font-weight: 900; color: var(--primary); line-height: 1; background: var(--primary-light); width: 92px; height: 92px; border-radius: 22px; display: flex; align-items: center; justify-content: center;">
+          あ
+        </div>
+        <div>
+          <span id="modalRowBadge" style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Hàng A</span>
+          <h2 id="modalRomajiTitle" style="font-size: 1.7rem;">Phát âm: "a"</h2>
+          <div style="display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="speakModalChar()">🔊 Nghe phát âm chữ</button>
+            <button class="btn-secondary" id="modalMasterBtn" onclick="toggleMasterCurrentKana()">✅ Đánh dấu Đã thuộc</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-grid">
+        <!-- Cột trái: Mẹo nhớ hình ảnh & Từ vựng ví dụ -->
+        <div>
+          <div class="mnemonic-box">
+            <h4 style="color: var(--primary); margin-bottom: 6px;">💡 Mẹo nhớ mặt chữ siêu tốc (Mnemonics):</h4>
+            <p id="modalMnemonicText" style="font-size: 0.95rem;"></p>
+            <div id="modalVisualArt" style="margin-top: 10px; text-align: center;"></div>
+          </div>
+
+          <div class="vocab-card" style="margin-top: 14px;">
+            <div class="vocab-header">
+              <span style="font-weight: 700; font-size: 0.85rem; color: var(--text-muted);">TỪ VỰNG VÍ DỤ CÓ CHỮ NÀY:</span>
+              <button class="audio-btn" onclick="speakModalExample()">🔊 Nghe từ & câu</button>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; margin: 8px 0;">
+              <span id="modalExIcon" style="font-size: 2.4rem;">🍬</span>
+              <div>
+                <div id="modalExWord" class="vocab-jp">あめ (ame)</div>
+                <div id="modalExMeaning" class="vocab-vi" style="margin: 0;">Kẹo / Cơn mưa</div>
+              </div>
+            </div>
+            <div id="modalExSentence" class="vocab-example"></div>
+          </div>
+        </div>
+
+        <!-- Cột phải: Bảng tập viết cảm ứng / chuột -->
+        <div style="text-align: center;">
+          <h4 style="margin-bottom: 6px;">✍️ Bảng Tập Tô Chữ Tương Tác</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px;">
+            Dùng chuột hoặc ngón tay tô theo nét chữ mờ bên dưới (<span id="modalStrokesCount">3</span> nét):
+          </p>
+
+          <div class="canvas-wrapper">
+            <div class="canvas-crosshair-h"></div>
+            <div class="canvas-crosshair-v"></div>
+            <div class="canvas-guide-char" id="canvasGuideChar">あ</div>
+            <canvas id="drawCanvas" width="240" height="240"></canvas>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 10px; margin-top: 12px;">
+            <button class="btn-secondary" onclick="clearCanvas()">🧹 Xóa viết lại</button>
+            <button class="btn-primary" onclick="rewardPracticeWriting()">✨ Đã viết xong (+5 XP)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

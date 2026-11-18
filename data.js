@@ -362,7 +362,65 @@ const APP_DATA = {
     { char: "ン", romaji: "n", row: "Hàng WA & N", mnemonic: "Mặt cười nháy 1 mắt nhìn ngang (N).", strokes: 2, example: { word: "パソコン", reading: "pasokon", meaning: "Máy tính cá nhân (PC)", icon: "💻", sentence: "パソコン で ゲーム を します (Chơi game trên PC)" } }
   ],
 
-  // 3. LỘ TRÌNH 10 BÀI GIẢNG TỪ NHẬP MÔN -> N5 -> N4 (KÈM VIDEO YOUTUBE HOẠT ĐỘNG 100% + BÀI GIẢNG TƯƠNG TÁC)
+  // 2B. BẢNG SỐ ĐẾM TIẾNG NHẬT TOÀN DIỆN (TỪ 0 -> HÀNG CHỤC -> HÀNG TRĂM -> HÀNG NGHÌN -> HÀNG VẠN)
+  numbers: {
+    basic: [
+      { num: "0", kanji: "零 / 〇", kana: "ゼロ / れい", speak: "ゼロ", romaji: "zero / rei", note: "Thường đọc là Zero (mượn tiếng Anh) hoặc Rei" },
+      { num: "1", kanji: "一", kana: "いち", speak: "いち", romaji: "ichi", note: "1 nét gạch ngang (Nhất)" },
+      { num: "2", kanji: "二", kana: "に", speak: "に", romaji: "ni", note: "2 nét gạch ngang (Nhị)" },
+      { num: "3", kanji: "三", kana: "さん", speak: "さん", romaji: "san", note: "3 nét gạch ngang (Tam)" },
+      { num: "4", kanji: "四", kana: "よん / し", speak: "よん", romaji: "yon / shi", note: "Ưu tiên dùng 'yon' (Ghép giờ dùng 'yo-ji')" },
+      { num: "5", kanji: "五", kana: "ご", speak: "ご", romaji: "go", note: "Số 5 (Ngũ)" },
+      { num: "6", kanji: "六", kana: "ろく", speak: "ろく", romaji: "roku", note: "Số 6 (Lục)" },
+      { num: "7", kanji: "七", kana: "なな / しち", speak: "なな", romaji: "nana / shichi", note: "Ưu tiên dùng 'nana' (Ghép giờ/tháng dùng 'shichi')" },
+      { num: "8", kanji: "八", kana: "はち", speak: "はち", romaji: "hachi", note: "Số 8 (Bát) - Lớp 8 là Hachi-nensei" },
+      { num: "9", kanji: "九", kana: "きゅう / く", speak: "きゅう", romaji: "kyuu / ku", note: "Ưu tiên dùng 'kyuu' (Ghép 9 giờ dùng 'ku-ji')" },
+      { num: "10", kanji: "十", kana: "じゅう", speak: "じゅう", romaji: "juu", note: "Chữ Thập (10) giống dấu cộng (+)" }
+    ],
+    tens: [
+      { num: "11", kanji: "十一", kana: "じゅういち", speak: "じゅういち", romaji: "juu-ichi", note: " Công thức: 10 (juu) + 1 (ichi)" },
+      { num: "12", kanji: "十二", kana: "じゅうに", speak: "じゅうに", romaji: "juu-ni", note: "10 (juu) + 2 (ni)" },
+      { num: "14", kanji: "十四", kana: "じゅうよん", speak: "じゅうよん", romaji: "juu-yon", note: "10 (juu) + 4 (yon) — 14 tuổi: Juuyon-sai" },
+      { num: "15", kanji: "十五", kana: "じゅうご", speak: "じゅうご", romaji: "juu-go", note: "10 (juu) + 5 (go)" },
+      { num: "19", kanji: "十九", kana: "じゅうきゅう", speak: "じゅうきゅう", romaji: "juu-kyuu", note: "10 (juu) + 9 (kyuu)" },
+      { num: "20", kanji: "二十", kana: "にじゅう", speak: "にじゅう", romaji: "ni-juu", note: "Công thức: 2 (ni) x 10 (juu)" },
+      { num: "30", kanji: "三十", kana: "さんじゅう", speak: "さんじゅう", romaji: "san-juu", note: "3 (san) x 10 (juu)" },
+      { num: "40", kanji: "四十", kana: "よんじゅう", speak: "よんじゅう", romaji: "yon-juu", note: "4 (yon) x 10 (juu) — luôn dùng yon" },
+      { num: "50", kanji: "五十", kana: "ごじゅう", speak: "ごじゅう", romaji: "go-juu", note: "5 (go) x 10 (juu)" },
+      { num: "60", kanji: "六十", kana: "ろくじゅう", speak: "ろくじゅう", romaji: "roku-juu", note: "6 (roku) x 10 (juu)" },
+      { num: "70", kanji: "七十", kana: "ななじゅう", speak: "ななじゅう", romaji: "nana-juu", note: "7 (nana) x 10 (juu) — luôn dùng nana" },
+      { num: "80", kanji: "八十", kana: "はちじゅう", speak: "はちじゅう", romaji: "hachi-juu", note: "8 (hachi) x 10 (juu)" },
+      { num: "90", kanji: "九十", kana: "きゅうじゅう", speak: "きゅうじゅう", romaji: "kyuu-juu", note: "9 (kyuu) x 10 (juu)" },
+      { num: "99", kanji: "九十九", kana: "きゅうじゅうきゅう", speak: "きゅうじゅうきゅう", romaji: "kyuu-juu-kyuu", note: "90 (kyuujuu) + 9 (kyuu)" }
+    ],
+    hundreds: [
+      { num: "100", kanji: "百", kana: "ひゃく", speak: "ひゃく", romaji: "hyaku", note: "Đơn vị Hàng trăm gốc: Hyaku (Không nói ichi-hyaku)" },
+      { num: "200", kanji: "二百", kana: "にひゃく", speak: "にひゃく", romaji: "ni-hyaku", note: "2 (ni) + 100 (hyaku)" },
+      { num: "300", kanji: "三百", kana: "さんびゃく", speak: "さんびゃく", romaji: "san-byaku", note: "⚠️ Biến âm đặc biệt: hyaku -> BYAKU", special: true },
+      { num: "400", kanji: "四百", kana: "よんひゃく", speak: "よんひゃく", romaji: "yon-hyaku", note: "4 (yon) + 100 (hyaku)" },
+      { num: "500", kanji: "五百", kana: "ごひゃく", speak: "ごひゃく", romaji: "go-hyaku", note: "5 (go) + 100 (hyaku)" },
+      { num: "600", kanji: "六百", kana: "ろっぴゃく", speak: "ろっぴゃく", romaji: "rop-pyaku", note: "⚠️ Biến âm đặc biệt: roku + hyaku -> ROPPYAKU", special: true },
+      { num: "700", kanji: "七百", kana: "ななひゃく", speak: "ななひゃく", romaji: "nana-hyaku", note: "7 (nana) + 100 (hyaku)" },
+      { num: "800", kanji: "八百", kana: "はっぴゃく", speak: "はっぴゃく", romaji: "hap-pyaku", note: "⚠️ Biến âm đặc biệt: hachi + hyaku -> HAPPYAKU", special: true },
+      { num: "900", kanji: "九百", kana: "きゅうひゃく", speak: "きゅうひゃく", romaji: "kyuu-hyaku", note: "9 (kyuu) + 100 (hyaku)" }
+    ],
+    thousands: [
+      { num: "1.000", kanji: "千", kana: "せん", speak: "せん", romaji: "sen", note: "Đơn vị Hàng nghìn gốc: Sen (Thiên)" },
+      { num: "2.000", kanji: "二千", kana: "にせん", speak: "にせん", romaji: "ni-sen", note: "2 (ni) + 1.000 (sen)" },
+      { num: "3.000", kanji: "三千", kana: "さんぜん", speak: "さんぜん", romaji: "san-zen", note: "⚠️ Biến âm đặc biệt: sen -> ZEN", special: true },
+      { num: "4.000", kanji: "四千", kana: "よんせん", speak: "よんせん", romaji: "yon-sen", note: "4 (yon) + 1.000 (sen)" },
+      { num: "5.000", kanji: "五千", kana: "ごせん", speak: "ごせん", romaji: "go-sen", note: "5 (go) + 1.000 (sen)" },
+      { num: "6.000", kanji: "六千", kana: "ろくせん", speak: "ろくせん", romaji: "roku-sen", note: "6 (roku) + 1.000 (sen)" },
+      { num: "7.000", kanji: "七千", kana: "ななせん", speak: "ななせん", romaji: "nana-sen", note: "7 (nana) + 1.000 (sen)" },
+      { num: "8.000", kanji: "八千", kana: "はっせん", speak: "はっせん", romaji: "has-sen", note: "⚠️ Biến âm đặc biệt: hachi + sen -> HASSEN", special: true },
+      { num: "9.000", kanji: "九千", kana: "きゅうせん", speak: "きゅうせん", romaji: "kyuu-sen", note: "9 (kyuu) + 1.000 (sen)" },
+      { num: "10.000", kanji: "一万", kana: "いちまん", speak: "いちまん", romaji: "ichi-man", note: "⚠️ Tiếng Nhật tính theo đơn vị VẠN (1 Man = 10.000)", special: true },
+      { num: "100.000", kanji: "十万", kana: "じゅうまん", speak: "じゅうまん", romaji: "juu-man", note: "10 Vạn = 100.000 (Juu-man)" },
+      { num: "1.000.000", kanji: "百万", kana: "ひゃくまん", speak: "ひゃくまん", romaji: "hyaku-man", note: "100 Vạn = 1 Triệu (Hyaku-man)" }
+    ]
+  },
+
+  // 3. LỘ TRÌNH 11 BÀI GIẢNG TỪ NHẬP MÔN -> N5 -> N4 (CÓ CHUYÊN ĐỀ ĐẾM SỐ TỪ 0 ĐẾN HÀNG VẠN)
   lessons: [
     {
       id: "lesson-1",
@@ -415,31 +473,62 @@ const APP_DATA = {
     {
       id: "lesson-3",
       level: "Cơ bản N5 (Bài 3)",
-      badgeColor: "#3b82f6",
-      title: "Bài 3: Con số, Đếm tuổi & Giới thiệu học sinh Lớp 8",
-      subtitle: "Đếm số từ 1 đến 100 và cách giới thiệu tên, tuổi, lớp học bằng tiếng Nhật",
+      badgeColor: "#0ea5e9",
+      title: "Bài 3: Đếm số từ 0 đến 10 & Cách ghép số hàng chục (11 → 99)",
+      subtitle: "Thuộc làu từng con số từ 0 đến 10 và quy tắc nhân/cộng ghép số hàng chục",
       icon: "🔢",
       videoId: "NRLS6e7JVj8",
-      videoTitle: "Video bài giảng: Bảng chữ cái, cách chào hỏi và đếm số cơ bản tiếng Nhật",
+      videoTitle: "Video bài giảng: Cách đếm số tiếng Nhật từ 0 đến 10 và ghép số",
       summaryPoints: [
-        "Ghép số hàng chục dễ như chơi xếp hình: 20 = 2 (ni) + 10 (juu) = にじゅう (nijuu). 14 = 10 (juu) + 4 (yon) = じゅうよん (juuyon).",
-        "Để nói tuổi: Số đếm + さい (sai). Học sinh lớp 8 (14 tuổi) là: じゅうよんさい (Juuyon-sai).",
-        "Để giới thiệu bản thân: 初めまして (Hajimemashite) + わたし は [Tên] です + どうぞ よろしく おねがいします。"
+        "Đếm từ 0 đến 10: 0 (Zero/Rei), 1 (Ichi), 2 (Ni), 3 (San), 4 (Yon/Shi), 5 (Go), 6 (Roku), 7 (Nana/Shichi), 8 (Hachi), 9 (Kyuu/Ku), 10 (Juu).",
+        "Quy tắc số từ 11 đến 19: Lấy 10 (Juu) + Số đơn vị. Ví dụ: 11 = じゅういち (Juu-ichi), 14 = じゅうよん (Juu-yon).",
+        "Quy tắc số tròn chục (20, 30... 90): Lấy Số đầu x 10 (Juu). Ví dụ: 20 = にじゅう (Ni-juu), 30 = さんじゅう (San-juu), 80 = はちじゅう (Hachi-juu)."
       ],
       vocab: [
-        { jp: "いち・に・さん", kana: "いち に さん", romaji: "Ichi - Ni - San", vi: "Số 1 - 2 - 3", icon: "1️⃣", exampleJp: "いち、に、さん、スタート！", exampleVi: "Một, hai, ba, bắt đầu!" },
-        { jp: "よん・ご・ろく", kana: "よん ご ろく", romaji: "Yon - Go - Roku", vi: "Số 4 - 5 - 6", icon: "4️⃣", exampleJp: "りんご が よっつ あります。", exampleVi: "Có 4 quả táo." },
-        { jp: "なな・はち・きゅう・じゅう", kana: "なな はち きゅう じゅう", romaji: "Nana - Hachi - Kyuu - Juu", vi: "Số 7 - 8 - 9 - 10", icon: "🔟", exampleJp: "はちがつ に うまれました。", exampleVi: "Con sinh vào tháng 8." },
-        { jp: "じゅうよんさい", kana: "じゅうよんさい", romaji: "Juuyon-sai", vi: "14 tuổi (Tuổi lớp 8)", icon: "🎂", exampleJp: "わたし は じゅうよんさい です。", exampleVi: "Năm nay con 14 tuổi." },
-        { jp: "ちゅうがくせい", kana: "ちゅうがくせい", romaji: "Chuugakusei", vi: "Học sinh cấp 2 (THCS)", icon: "🏫", exampleJp: "わたし は ベトナム の ちゅうがくせい です。", exampleVi: "Con là học sinh cấp 2 người Việt Nam." },
-        { jp: "はちねんせい", kana: "はちねんせい", romaji: "Hachi-nensei", vi: "Học sinh lớp 8", icon: "🎖️", exampleJp: "わたし は はちねんせい です。", exampleVi: "Con là học sinh lớp 8." }
+        { jp: "0 - ゼロ / れい", kana: "ゼロ", romaji: "Zero / Rei", vi: "Số 0 (Không)", icon: "0️⃣", exampleJp: "ゼロ から はじめましょう！", exampleVi: "Hãy bắt đầu từ con số 0 nhé!" },
+        { jp: "1 - いち (一)", kana: "いち", romaji: "Ichi", vi: "Số 1 (Một)", icon: "1️⃣", exampleJp: "いちばん すき です。", exampleVi: "Con thích nhất (số 1)." },
+        { jp: "2 - に (二)", kana: "に", romaji: "Ni", vi: "Số 2 (Hai)", icon: "2️⃣", exampleJp: "りんご が ふたつ (に) あります。", exampleVi: "Có 2 quả táo." },
+        { jp: "3 - さん (三)", kana: "さん", romaji: "San", vi: "Số 3 (Ba)", icon: "3️⃣", exampleJp: "いち、に、さん！", exampleVi: "Một, hai, ba!" },
+        { jp: "4 - よん / し (四)", kana: "よん", romaji: "Yon / Shi", vi: "Số 4 (Bốn)", icon: "4️⃣", exampleJp: "よん は 4 です。", exampleVi: "Yon là số 4." },
+        { jp: "5 - ご (五)", kana: "ご", romaji: "Go", vi: "Số 5 (Năm)", icon: "5️⃣", exampleJp: "ごじ に かえります。", exampleVi: "Về nhà lúc 5 giờ." },
+        { jp: "6 - ろく (六)", kana: "ろく", romaji: "Roku", vi: "Số 6 (Sáu)", icon: "6️⃣", exampleJp: "まいあさ ろくじ に おきます。", exampleVi: "Mỗi sáng dậy lúc 6 giờ." },
+        { jp: "7 - なな / しち (七)", kana: "なな", romaji: "Nana / Shichi", vi: "Số 7 (Bảy)", icon: "7️⃣", exampleJp: "ラッキーセブン は なな です。", exampleVi: "Con số 7 may mắn đọc là Nana." },
+        { jp: "8 - はち (八)", kana: "はち", romaji: "Hachi", vi: "Số 8 (Tám)", icon: "8️⃣", exampleJp: "わたし は はちねんせい です。", exampleVi: "Con là học sinh lớp 8." },
+        { jp: "9 - きゅう / く (九)", kana: "きゅう", romaji: "Kyuu / Ku", vi: "Số 9 (Chín)", icon: "9️⃣", exampleJp: "きゅう たす いち は じゅう です。", exampleVi: "9 cộng 1 bằng 10." },
+        { jp: "10 - じゅう (十)", kana: "じゅう", romaji: "Juu", vi: "Số 10 (Mười)", icon: "🔟", exampleJp: "いち から じゅう まで かぞえます。", exampleVi: "Đếm từ 1 đến 10." },
+        { jp: "20 - にじゅう (二十)", kana: "にじゅう", romaji: "Ni-juu", vi: "Số 20 (Hai mươi) & Hàng chục", icon: "🔢", exampleJp: "さんじゅう (30), よんじゅう (40), ごじゅう (50).", exampleVi: "Ghép số đầu + Juu để tạo hàng chục!" }
       ]
     },
     {
       id: "lesson-4",
       level: "Cơ bản N5 (Bài 4)",
       badgeColor: "#3b82f6",
-      title: "Bài 4: Mẫu câu giới thiệu bản thân & Gia đình yêu thương",
+      title: "Bài 4: Đếm số Hàng Trăm (100), Hàng Nghìn (1.000), Hàng Vạn & Tuổi tác",
+      subtitle: "Chinh phục các số lớn 100 → 1.000.000, các số biến âm đặc biệt và cách nói tuổi lớp 8",
+      icon: "💯",
+      videoId: "ZC-43d_zWz8",
+      videoTitle: "Video bài giảng: Cách đọc số lớn, tuổi tác và từ vựng bài 1",
+      summaryPoints: [
+        "Hàng trăm đọc là ひゃく (Hyaku). Nhớ 3 số biến âm: 300 = さんびゃく (Sanbyaku), 600 = ろっぴゃく (Roppyaku), 800 = はっぴゃく (Happyaku).",
+        "Hàng nghìn đọc là せん (Sen). Nhớ 2 số biến âm: 3.000 = さんぜん (Sanzen), 8.000 = はっせん (Hassen).",
+        "Hàng chục nghìn (10.000) người Nhật gọi là 1 Vạn: いちまん (Ichiman). Để nói tuổi: Số đếm + さい (Sai)."
+      ],
+      vocab: [
+        { jp: "100 - ひゃく (百)", kana: "ひゃく", romaji: "Hyaku", vi: "Một trăm (100)", icon: "💯", exampleJp: "テスト で ひゃくてん を とりました！", exampleVi: "Con đạt 100 điểm bài kiểm tra!" },
+        { jp: "300 - さんびゃく (三百)", kana: "さんびゃく", romaji: "San-byaku", vi: "Ba trăm (300 - Biến âm Byaku)", icon: "⚠️", exampleJp: "これ は さんびゃくえん です。", exampleVi: "Cái này giá 300 Yên." },
+        { jp: "600 (ろっぴゃく) & 800 (はっぴゃく)", kana: "ろっぴゃく はっぴゃく", romaji: "Roppyaku & Happyaku", vi: "600 & 800 (Biến âm Ppyaku)", icon: "🔔", exampleJp: "ろっぴゃくえん と はっぴゃくえん。", exampleVi: "600 Yên và 800 Yên." },
+        { jp: "1.000 - せん (千)", kana: "せん", romaji: "Sen", vi: "Một nghìn (1.000)", icon: "🪙", exampleJp: "せんえん (1.000 Yên), にせんえん (2.000 Yên).", exampleVi: "Đơn vị hàng nghìn đọc là Sen." },
+        { jp: "3.000 (さんぜん) & 8.000 (はっせん)", kana: "さんぜん はっせん", romaji: "Sanzen & Hassen", vi: "3.000 & 8.000 (Biến âm)", icon: "✨", exampleJp: "さんぜんえん の ほん。", exampleVi: "Quyển sách giá 3.000 Yên." },
+        { jp: "10.000 - いちまん (一万)", kana: "いちまん", romaji: "Ichi-man", vi: "Mười nghìn (1 Vạn)", icon: "💴", exampleJp: "いちまんえん さつ。", exampleVi: "Tờ tiền 10.000 Yên (1 Man)." },
+        { jp: "じゅうよんさい (14歳)", kana: "じゅうよんさい", romaji: "Juuyon-sai", vi: "14 tuổi (Tuổi học sinh lớp 8)", icon: "🎂", exampleJp: "わたし は じゅうよんさい です。", exampleVi: "Năm nay con 14 tuổi." },
+        { jp: "なんさい ですか", kana: "なんさい ですか", romaji: "Nan-sai desu ka", vi: "Bạn bao nhiêu tuổi?", icon: "🙋", exampleJp: "あなた は なんさい ですか。", exampleVi: "Bạn năm nay bao nhiêu tuổi?" }
+      ]
+    },
+    {
+      id: "lesson-5",
+      level: "Cơ bản N5 (Bài 5)",
+      badgeColor: "#3b82f6",
+      title: "Bài 5: Mẫu câu giới thiệu bản thân & Gia đình yêu thương",
       subtitle: "Cách gọi Bố, Mẹ, Anh, Chị, Em và mẫu câu khẳng định A は B です",
       icon: "👨‍👩‍👧‍👦",
       videoId: "YBI4nM5HC4c",
@@ -458,10 +547,10 @@ const APP_DATA = {
       ]
     },
     {
-      id: "lesson-5",
-      level: "Sơ cấp N5 (Bài 5)",
+      id: "lesson-6",
+      level: "Sơ cấp N5 (Bài 6)",
       badgeColor: "#6366f1",
-      title: "Bài 5: Đồ dùng học tập & Trường lớp (Kore / Sore / Are)",
+      title: "Bài 6: Đồ dùng học tập & Trường lớp (Kore / Sore / Are)",
       subtitle: "Cách chỉ đồ vật quanh mình: Cái này (Kore), Cái đó (Sore), Cái kia (Are)",
       icon: "🎒",
       videoId: "8GaOeIUHvfc",
@@ -480,10 +569,10 @@ const APP_DATA = {
       ]
     },
     {
-      id: "lesson-6",
-      level: "Sơ cấp N5 (Bài 6)",
+      id: "lesson-7",
+      level: "Sơ cấp N5 (Bài 7)",
       badgeColor: "#8b5cf6",
-      title: "Bài 6: Hỏi địa điểm & Khám phá trường học, siêu thị",
+      title: "Bài 7: Hỏi địa điểm & Khám phá trường học, siêu thị",
       subtitle: "Cách hỏi 'Ở đâu?' (Doko desu ka) và chỉ vị trí Koko / Soko / Asoko",
       icon: "🗺️",
       videoId: "YIj5iQrYBrk",
@@ -502,10 +591,10 @@ const APP_DATA = {
       ]
     },
     {
-      id: "lesson-7",
-      level: "Sơ cấp N5 (Bài 7)",
+      id: "lesson-8",
+      level: "Sơ cấp N5 (Bài 8)",
       badgeColor: "#f59e0b",
-      title: "Bài 7: Hỏi giá tiền, Mua sắm & Ẩm thực Nhật Bản",
+      title: "Bài 8: Hỏi giá tiền, Mua sắm & Ẩm thực Nhật Bản",
       subtitle: "Cách nói 'Cho cháu món này' (Kudasai) và hỏi giá 'Bao nhiêu tiền?' (Ikura)",
       icon: "🍣",
       videoId: "6tn9uUphZx4",
@@ -525,16 +614,16 @@ const APP_DATA = {
       ]
     },
     {
-      id: "lesson-8",
-      level: "Trung cấp N5-N4 (Bài 8)",
+      id: "lesson-9",
+      level: "Trung cấp N5-N4 (Bài 9)",
       badgeColor: "#ec4899",
-      title: "Bài 8: Giờ giấc, Thứ ngày & Lịch sinh hoạt hàng ngày",
+      title: "Bài 9: Giờ giấc, Thứ ngày & Lịch sinh hoạt hàng ngày",
       subtitle: "Cách nói giờ (Ji), phút (Pun), các thứ trong tuần và thời gian biểu của con",
       icon: "⏰",
       videoId: "vDhEfsOVuiE",
       videoTitle: "Video bài giảng: Phản xạ hội thoại Thời gian, Đi lại & Động từ hàng ngày",
       summaryPoints: [
-        "Cách nói Giờ: Số đếm + じ (ji). Ví dụ: 6 giờ = ろくじ (Roku-ji), 7 giờ = しちじ (Shichi-ji).",
+        "Cách nói Giờ: Số đếm + じ (ji). Ví dụ: 6 giờ = ろくじ (Roku-ji), 7 giờ = しちじ (Shichi-ji), 4 giờ = よじ (Yo-ji), 9 giờ = くじ (Ku-ji).",
         "Hỏi bây giờ là mấy giờ: いま なんじ ですか (Ima nan-ji desu ka?).",
         "Làm việc gì vào lúc mấy giờ: Dùng trợ từ に (ni) đứng sau giờ. Ví dụ: ろくじ に おきます (Dậy lúc 6 giờ)."
       ],
@@ -548,10 +637,10 @@ const APP_DATA = {
       ]
     },
     {
-      id: "lesson-9",
-      level: "Trung cấp N4 (Bài 9)",
+      id: "lesson-10",
+      level: "Trung cấp N4 (Bài 10)",
       badgeColor: "#e11d48",
-      title: "Bài 9: Phương tiện giao thông & Du lịch Nhật Bản",
+      title: "Bài 10: Phương tiện giao thông & Du lịch Nhật Bản",
       subtitle: "Đi đến đâu (へ ikimasu) bằng phương tiện gì (で) cùng với ai (と)",
       icon: "🚅",
       videoId: "xqIuqDEU7Q4",
@@ -571,10 +660,10 @@ const APP_DATA = {
       ]
     },
     {
-      id: "lesson-10",
-      level: "Nâng cao N4 (Bài 10)",
+      id: "lesson-11",
+      level: "Nâng cao N4 (Bài 11)",
       badgeColor: "#7c3aed",
-      title: "Bài 10: Các hoạt động hàng ngày & Chia động từ nâng cao",
+      title: "Bài 11: Các hoạt động hàng ngày & Chia động từ nâng cao",
       subtitle: "Làm chủ các động từ ăn, uống, đọc, xem, nghe và câu rủ rê, mong muốn",
       icon: "🚀",
       videoId: "D30cIpTtRTg",

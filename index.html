@@ -44,19 +44,19 @@
   <!-- THANH ĐIỀU HƯỚNG 5 CHẶNG HỌC (MÁY TÍNH, LAPTOP & IPAD) -->
   <nav class="main-nav" aria-label="Điều hướng chính">
     <button class="nav-tab active" data-target="tab-kana" onclick="switchTab('tab-kana')">
-      🌸 1. Bảng Chữ Cái (Hiragana & Katakana)
+      🌸 1. Chữ Cái & Số Đếm
     </button>
     <button class="nav-tab" data-target="tab-lessons" onclick="switchTab('tab-lessons')">
-      🎬 2. Bài Giảng Video & Từ Vựng
+      🎬 2. Bài Giảng & Từ Vựng
     </button>
     <button class="nav-tab" data-target="tab-grammar" onclick="switchTab('tab-grammar')">
-      🧩 3. Ngữ Pháp & Kanji Chiết Tự
+      🧩 3. Ngữ Pháp & Kanji
     </button>
     <button class="nav-tab" data-target="tab-games" onclick="switchTab('tab-games')">
-      🎮 4. Luyện Tập & Trò Chơi
+      🎮 4. Luyện Tập & Game
     </button>
     <button class="nav-tab" data-target="tab-parent" onclick="switchTab('tab-parent')">
-      👨‍👧 5. Góc Phụ Huynh (Thêm Bài & Đưa Lên Web)
+      👨‍👧 5. Góc Phụ Huynh
     </button>
   </nav>
 
@@ -118,7 +118,7 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- TAB 1: BẢNG CHỮ CÁI HIRAGANA & KATAKANA TƯƠNG TÁC                 -->
+    <!-- TAB 1: BẢNG CHỮ CÁI HIRAGANA, KATAKANA & BẢNG SỐ ĐẾM TƯƠNG TÁC     -->
     <!-- ================================================================= -->
     <section id="tab-kana" class="tab-panel active">
       <div class="sub-toolbar">
@@ -129,16 +129,60 @@
           <button class="pill-btn" id="btnShowKata" onclick="switchKanaType('katakana')">
             ア Bảng Katakana (46 chữ cứng)
           </button>
+          <button class="pill-btn" id="btnShowNumbers" onclick="switchKanaType('numbers')">
+            🔢 Bảng Số Đếm (0 → 10, Chục, Trăm, Nghìn, Vạn)
+          </button>
         </div>
 
         <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-          <span style="font-size: 0.88rem; color: var(--text-muted);">
+          <span id="kanaToolbarHint" style="font-size: 0.88rem; color: var(--text-muted);">
             💡 <strong>Bấm vào từng ô chữ</strong> để nghe phát âm, xem mẹo nhớ hình ảnh & tập viết nét!
           </span>
         </div>
       </div>
 
+      <!-- Lưới chữ cái Hiragana / Katakana -->
       <div id="kanaGridContainer" class="kana-grid"></div>
+
+      <!-- Chuyên đề Bảng Số Đếm Tiếng Nhật Toàn Diện (Từ 0 đến Hàng Vạn + Máy Đọc Số Tự Động) -->
+      <div id="numbersSectionContainer" style="display: none;">
+        <!-- Máy đọc và chuyển đổi số bất kỳ sang tiếng Nhật -->
+        <div class="lesson-detail-card" style="margin-bottom: 24px; background: linear-gradient(135deg, #1e1b4b, #312e81); color: white;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div style="flex: 1 1 320px;">
+              <span class="hero-badge">🧮 MÁY ĐỌC SỐ TIẾNG NHẬT TỰ ĐỘNG</span>
+              <h3 style="font-size: 1.35rem; margin-bottom: 4px;">Nhập bất kỳ con số nào (từ 0 đến 99.999.999) để xem cách đọc!</h3>
+              <p style="font-size: 0.88rem; opacity: 0.88;">
+                Ví dụ: Gõ <strong>14</strong> (tuổi lớp 8), <strong>300</strong> (biến âm trăm), <strong>2026</strong>, hoặc <strong>15000</strong> rồi bấm Nghe!
+              </p>
+              <div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;">
+                <input
+                  type="number"
+                  id="customNumberInput"
+                  min="0"
+                  max="99999999"
+                  value="14"
+                  oninput="convertCustomNumber()"
+                  style="padding: 10px 16px; border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.12); color: white; font-size: 1.2rem; font-weight: 800; width: 180px;"
+                />
+                <button class="btn-primary" onclick="speakCustomNumber()" style="font-size: 1rem;">
+                  🔊 Phát âm số này
+                </button>
+              </div>
+            </div>
+
+            <div style="flex: 1 1 320px; background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); padding: 16px 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2);">
+              <div style="font-size: 0.8rem; opacity: 0.85;">KẾT QUẢ CHUYỂN ĐỔI SANG TIẾNG NHẬT:</div>
+              <div id="numResultKanji" style="font-size: 1.8rem; font-weight: 900; color: #fde047; margin-top: 2px;">十四</div>
+              <div id="numResultKana" style="font-size: 1.3rem; font-weight: 800; margin-top: 2px;">じゅうよん</div>
+              <div id="numResultRomaji" style="font-size: 1rem; color: #fda4af; font-weight: 700; margin-top: 2px;">juu-yon</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Bảng số đếm chi tiết -->
+        <div id="numbersTablesContent"></div>
+      </div>
     </section>
 
     <!-- ================================================================= -->
@@ -247,7 +291,8 @@
           <select id="quizTopicSelect" onchange="initQuizQuestion(); initMatchingGame(); initListenQuestion();" style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-weight: 700;">
             <option value="hiragana">Bảng chữ cái Hiragana</option>
             <option value="katakana">Bảng chữ cái Katakana</option>
-            <option value="vocab">Từ vựng & Giao tiếp 10 bài</option>
+            <option value="numbers">🔢 Đếm số tiếng Nhật (0 → Hàng Vạn)</option>
+            <option value="vocab">Từ vựng & Giao tiếp các bài</option>
             <option value="kanji">Chữ Hán (Kanji) cơ bản</option>
           </select>
         </div>

@@ -38,6 +38,8 @@ window.addEventListener("DOMContentLoaded", () => {
   loadUserState();
   initCanvasDrawing();
   renderKanaGrid();
+  renderNumbersSection();
+  convertCustomNumber();
   renderLessonSidebar();
   renderLessonDetail(0);
   renderGrammarAndKanji();
@@ -246,13 +248,190 @@ function toggleTheme() {
 }
 
 // ============================================================================
-// 4. CHẶNG 1: BẢNG CHỮ CÁI HIRAGANA & KATAKANA + MODAL TẬP VIẾT
+// 4. CHẶNG 1: BẢNG CHỮ CÁI HIRAGANA, KATAKANA & CHUYÊN ĐỀ SỐ ĐẾM
 // ============================================================================
 function switchKanaType(type) {
-  currentKanaType = type;
   document.getElementById("btnShowHira").classList.toggle("active", type === "hiragana");
   document.getElementById("btnShowKata").classList.toggle("active", type === "katakana");
-  renderKanaGrid();
+  const btnNum = document.getElementById("btnShowNumbers");
+  if (btnNum) btnNum.classList.toggle("active", type === "numbers");
+
+  const kanaGrid = document.getElementById("kanaGridContainer");
+  const numSection = document.getElementById("numbersSectionContainer");
+  const hintEl = document.getElementById("kanaToolbarHint");
+
+  if (type === "numbers") {
+    kanaGrid.style.display = "none";
+    if (numSection) numSection.style.display = "block";
+    if (hintEl) {
+      hintEl.innerHTML = "💡 <strong>Bấm vào từng ô số</strong> để nghe phát âm tiếng Nhật chuẩn bản xứ!";
+    }
+  } else {
+    currentKanaType = type;
+    kanaGrid.style.display = "grid";
+    if (numSection) numSection.style.display = "none";
+    if (hintEl) {
+      hintEl.innerHTML = "💡 <strong>Bấm vào từng ô chữ</strong> để nghe phát âm, xem mẹo nhớ hình ảnh & tập viết nét!";
+    }
+    renderKanaGrid();
+  }
+}
+
+function renderNumbersSection() {
+  const container = document.getElementById("numbersTablesContent");
+  if (!container || !APP_DATA.numbers) return;
+
+  const sections = [
+    {
+      title: "1️⃣ Đếm số cơ bản từ 0 đến 10 (Nền tảng bắt buộc phải thuộc làu)",
+      desc: "Bấm vào từng con số để nghe giọng đọc tiếng Nhật. Chú ý số 4 (Yon), số 7 (Nana) và số 9 (Kyuu) có 2 cách đọc nhưng khi đếm số thông thường luôn ưu tiên đọc Yon, Nana, Kyuu.",
+      list: APP_DATA.numbers.basic
+    },
+    {
+      title: "🔟 Số ghép từ 11 đến 19 & Các số tròn chục (20 → 99)",
+      desc: "Quy tắc cực dễ: Từ 11–19 lấy 10 (Juu) + Số đơn vị (Ví dụ 14 = Juu + Yon = Juuyon). Số tròn chục (20–90) lấy Số đầu + 10 (Juu) (Ví dụ 20 = Ni + Juu = Nijuu).",
+      list: APP_DATA.numbers.tens
+    },
+    {
+      title: "💯 Đếm số Hàng Trăm (100 → 900) & 3 Số Biến Âm Đặc Biệt",
+      desc: "Đơn vị Hàng trăm là ひゃく (Hyaku). Hãy chú ý 3 ô màu vàng có biến âm đặc biệt: 300 (San-byaku), 600 (Rop-pyaku) và 800 (Hap-pyaku)!",
+      list: APP_DATA.numbers.hundreds
+    },
+    {
+      title: "🪙 Đếm số Hàng Nghìn (1.000 → 9.000) & Hàng Vạn (10.000 → 1 Triệu)",
+      desc: "Đơn vị Hàng nghìn là せん (Sen) — chú ý 3.000 (San-zen) và 8.000 (Has-sen). Từ 10.000 trở lên người Nhật tính theo đơn vị VẠN: 10.000 = 1 Vạn (Ichi-man).",
+      list: APP_DATA.numbers.thousands
+    }
+  ];
+
+  container.innerHTML = sections
+    .map(
+      (sec) => `
+      <div class="num-group-card">
+        <h3 style="font-size: 1.22rem; color: var(--text-main);">${sec.title}</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 4px;">${sec.desc}</p>
+        <div class="num-grid">
+          ${sec.list
+            .map(
+              (item) => `
+              <div class="num-card ${item.special ? "special" : ""}" onclick="speakJapanese('${item.speak}')">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span class="num-digit">${item.num}</span>
+                  <span class="num-kanji">${item.kanji} 🔊</span>
+                </div>
+                <div class="num-kana">${item.kana}</div>
+                <div class="num-romaji">${item.romaji}</div>
+                <div class="num-note">${item.note}</div>
+              </div>
+            `
+            )
+            .join("")}
+        </div>
+      </div>
+    `
+    )
+    .join("");
+}
+
+// BỘ CHUYỂN ĐỔI SỐ BẤT KỲ (0 -> 99.999.999) SANG CHỮ HÁN, HIRAGANA & ROMAJI CHUẨN
+function japaneseNumberConverter(n) {
+  n = parseInt(n, 10);
+  if (isNaN(n) || n < 0) n = 0;
+  if (n > 99999999) n = 99999999;
+
+  if (n === 0) {
+    return { kanji: "零 (0)", kana: "ゼロ (れい)", romaji: "zero (rei)", speak: "ゼロ" };
+  }
+
+  const kanjiDigits = ["", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+  const kanaOnes = ["", "いち", "に", "さん", "よん", "ご", "ろく", "なな", "はち", "きゅう"];
+  const romaOnes = ["", "ichi", "ni", "san", "yon", "go", "roku", "nana", "hachi", "kyuu"];
+
+  function convertUnder10000(val) {
+    let kj = "";
+    let kn = "";
+    let rm = [];
+
+    const th = Math.floor(val / 1000);
+    const hu = Math.floor((val % 1000) / 100);
+    const te = Math.floor((val % 100) / 10);
+    const on = val % 10;
+
+    if (th > 0) {
+      kj += (th === 1 ? "" : kanjiDigits[th]) + "千";
+      if (th === 1) { kn += "せん"; rm.push("sen"); }
+      else if (th === 3) { kn += "さんぜん"; rm.push("sanzen"); }
+      else if (th === 8) { kn += "はっせん"; rm.push("hassen"); }
+      else { kn += kanaOnes[th] + "せん"; rm.push(romaOnes[th] + "sen"); }
+    }
+
+    if (hu > 0) {
+      kj += (hu === 1 ? "" : kanjiDigits[hu]) + "百";
+      if (hu === 1) { kn += "ひゃく"; rm.push("hyaku"); }
+      else if (hu === 3) { kn += "さんびゃく"; rm.push("sanbyaku"); }
+      else if (hu === 6) { kn += "ろっぴゃく"; rm.push("roppyaku"); }
+      else if (hu === 8) { kn += "はっぴゃく"; rm.push("happyaku"); }
+      else { kn += kanaOnes[hu] + "ひゃく"; rm.push(romaOnes[hu] + "hyaku"); }
+    }
+
+    if (te > 0) {
+      kj += (te === 1 ? "" : kanjiDigits[te]) + "十";
+      if (te === 1) { kn += "じゅう"; rm.push("juu"); }
+      else { kn += kanaOnes[te] + "じゅう"; rm.push(romaOnes[te] + "juu"); }
+    }
+
+    if (on > 0) {
+      kj += kanjiDigits[on];
+      kn += kanaOnes[on];
+      rm.push(romaOnes[on]);
+    }
+
+    return { kj, kn, rm: rm.join(" ") };
+  }
+
+  let kanjiOut = "";
+  let kanaOut = "";
+  let romaOut = [];
+
+  const manPart = Math.floor(n / 10000);
+  const restPart = n % 10000;
+
+  if (manPart > 0) {
+    const m = convertUnder10000(manPart);
+    kanjiOut += m.kj + "万";
+    kanaOut += m.kn + "まん ";
+    romaOut.push(m.rm + "-man");
+  }
+
+  if (restPart > 0) {
+    const r = convertUnder10000(restPart);
+    kanjiOut += r.kj;
+    kanaOut += r.kn;
+    romaOut.push(r.rm);
+  }
+
+  return {
+    kanji: kanjiOut,
+    kana: kanaOut.trim(),
+    romaji: romaOut.join(" "),
+    speak: kanaOut.replace(/\s+/g, "")
+  };
+}
+
+function convertCustomNumber() {
+  const inputEl = document.getElementById("customNumberInput");
+  if (!inputEl) return;
+  const res = japaneseNumberConverter(inputEl.value);
+  document.getElementById("numResultKanji").textContent = res.kanji;
+  document.getElementById("numResultKana").textContent = res.kana;
+  document.getElementById("numResultRomaji").textContent = res.romaji;
+}
+
+function speakCustomNumber() {
+  const inputEl = document.getElementById("customNumberInput");
+  if (!inputEl) return;
+  const res = japaneseNumberConverter(inputEl.value);
+  speakJapanese(res.speak);
 }
 
 function renderKanaGrid() {
@@ -845,6 +1024,20 @@ function getPoolByTopic(topic) {
       a: `${k.romaji} (${k.example.meaning})`,
       speak: k.char,
       label: "Bảng Katakana"
+    }));
+  }
+  if (topic === "numbers" && APP_DATA.numbers) {
+    const allNums = [
+      ...APP_DATA.numbers.basic,
+      ...APP_DATA.numbers.tens,
+      ...APP_DATA.numbers.hundreds,
+      ...APP_DATA.numbers.thousands
+    ];
+    return allNums.map((n) => ({
+      q: `🔢 Số ${n.num} (${n.kanji})`,
+      a: `${n.kana} (${n.romaji})`,
+      speak: n.speak,
+      label: "Số đếm tiếng Nhật"
     }));
   }
   if (topic === "kanji") {
